@@ -47,7 +47,7 @@ div.txtbx
     margin-right: auto ;
 }
 
-p
+p.indt
 {
     text-indent:30px;
 } 
@@ -73,12 +73,179 @@ p
 <br>
 
 <div class="txtbx">
-    add text here
-
+    <p>
+    This documents provides a set of instructions for setting up an environment for developing code targeted for 
+    Texas Instrument's Tiva C series ARM Cortex M4 processor. At the moment, this has only been verified to work
+    under an Ubuntu based distribution, but that it mainly in part to easy access of dependency libraries. In 
+    theory, this should be agnostic to whatver flavor of Linux is being run.
+    </p>
+    
+    <p>
+    Before begining, it is advised to create a new folder in which to place the files that are to be downloaded.
+    </p>
+    <p>
+    The first step of this process is installing the various dependencies needed to build and run all components 
+    of the tool chain. These can be fetched by using apt-get and requesting the specified libraries as indicated 
+    below.
+    </p>
     <div style="height:100px;width:400px;border:1px solid #ccc;font-family:'Lucida Console', Monaco, monospace;overflow:auto;">
-As you can see, once there's enough text in this box, the box will grow scroll bars.. that's why we call it a scroll box! You could also place an image into the scroll box.
+    <pre>
+sudo apt-get install apt-src \
+gawk \
+git \
+gzip \
+perl \
+autoconf \
+m4 \
+automake \
+libtool \
+libncurses5-dev \
+libusb-1.0-0-dev \
+gettext \
+gperf \
+dejagnu \
+expect \
+tcl \
+autogen \
+guile-2.0 \
+flex \
+flip \
+bison \
+tofrodos \
+texinfo \
+g++ \
+gcc-multilib \
+mingw32 \
+mingw32-binutils \
+mingw32-runtime \
+libgmp3-dev \
+libmpfr-dev \
+debhelper \
+texlive \
+texlive-extra-utils
+    </pre>
     </div>
-
+    
+    <p>
+    Next, grab the latest version of the tool chain from offical development website,
+    <a href="https://launchpad.net/gcc-arm-embedded">GCC-ARM-embedded</a>. Place the file in 
+    a new child folder if you prefer.
+    </p>
+    
+    <p>
+    After the TAR file has been downloaded decompress it using the command below and add its 
+    commands to the terminal session for ease of use. 
+    </p>
+    <div style="height:100px;width:400px;border:1px solid #ccc;font-family:'Lucida Console', Monaco, monospace;overflow:auto;">
+    <pre>
+tar xjf gcc-arm-none-eabi-*version*-linux.tar.bz2
+echo 'export PATH=$PATH:/path/to/folder/gcc-arm-none-eabi-4_8-2013q4/bin' >> ~/.profile
+    </pre>
+    </div>
+    
+    <p>
+    The next item to get is lm4tools. This contains the program lm4flash which takes the compiled ARM code 
+    and placed it onto the target microprocessor. Unlike the last segment, lm4tools does not come precompiled
+    and will need to be built. To get the source, build lm4flash, and add it to the terminal session, run the 
+    commands below.
+    <div style="height:100px;width:400px;border:1px solid #ccc;font-family:'Lucida Console', Monaco, monospace;overflow:auto;">
+    <pre>
+git clone https://github.com/utzig/lm4tools.git
+cd lm4tools/lm4flash
+make
+echo 'export PATH=$PATH:/path/to/folder/lm4tools/lm4flash/' >> ~/.profile
+    </pre>
+    </div>
+    </p>
+    
+    <p>
+    The last item to retrieve is Texas Instrument's Tivaware package. This contains the register mappings, 
+    header files, and examples for the Tiva C family. This file is available from Texas Instrument's website, 
+    <a href='http://www.ti.com/tool/sw-tm4c'>Tivaware</a>. Download the file labeled as "SW-TM4C: TivaWare for 
+    C Series Software (Complete)". It will be downloaded as an EXE file (don't worry), just place it in a new 
+    child folder.
+    </p>
+    
+    <p>
+    Despite the fact it is labeled as an EXE file, it is really just a compressed ZIP file. Linux can handle it 
+    by simply running the unzip command. 
+    </p>
+    <div style="height:100px;width:400px;border:1px solid #ccc;font-family:'Lucida Console', Monaco, monospace;overflow:auto;">
+    <pre>
+unzip SW-TM4C-*version*.exe
+make
+    </pre>
+    </div>
+    
+    <p>
+    The build process will take ~15 minutes or so depending on how fast your computer is. After building the various 
+    tools, you can burn the test code blinky.c to the microcontroller to make sure everything was installed correctly.
+    First navigate to your board's examples folder. The board utilized for this tutorial is the EK-TM4C123GXL.
+    </p>
+    <div style="height:100px;width:400px;border:1px solid #ccc;font-family:'Lucida Console', Monaco, monospace;overflow:auto;">
+    <pre> 
+cd tivaware/examples/boards/ek-tm4c123gxl/blinky/
+    </pre>
+    </div>
+    
+    <p>
+    All of the code has already been created, all that is left is to compile, link, prepare the binary, and burn the code. To compile the code, run
+    the following command below, with the appropriate changes for -DPART and the include (-I) path.
+    </p>
+    <div style="height:100px;width:400px;border:1px solid #ccc;font-family:'Lucida Console', Monaco, monospace;overflow:auto;">
+    <pre>
+arm-none-eabi-gcc blinky.c startup_gcc.c \
+-g \
+-mthumb \
+-mcpu=cortex-m4 \ 
+-mfpu=fpv4-sp-d16 \
+-mfloat-abi=hard \
+-Os \
+-ffunction-sections \
+-fdata-sections \
+-MD \
+-std=c99 \
+-Wall \
+-pedantic \
+-DPART_TM4C123GH6PM \
+-c 
+\-I/path/to/folder/tivaware/inc \
+-DTARGET_IS_BLIZZARD_RA1
+    </pre>
+    </div>
+    
+    <p>
+    Next, link the files as indicated below.
+    </p>
+    <div style="height:100px;width:400px;border:1px solid #ccc;font-family:'Lucida Console', Monaco, monospace;overflow:auto;">
+    <pre>
+arm-none-eabi-ld -T blinky.ld --entry ResetISR -o a.out startup_gcc.o blinky.o --gc-sections
+    </pre>
+    </div>
+    
+    <p>
+    Prepare the binary image.
+    </p>
+    <div style="height:100px;width:400px;border:1px solid #ccc;font-family:'Lucida Console', Monaco, monospace;overflow:auto;">
+    <pre>
+arm-none-eabi-objcopy -O binary a.out blinky.bin
+    </pre>
+    </div>
+    
+    <p>
+    And finally, flash the code to the microcontroller itself. Make sure that the proper usb connections have been made and that 
+    the target board is in the correct power/select state to recieve new code.
+    </p>
+    <div style="height:100px;width:400px;border:1px solid #ccc;font-family:'Lucida Console', Monaco, monospace;overflow:auto;">
+    <pre>
+sudo lm4flash blinky.bin
+    </pre>
+    </div>
+    
+    <p>
+    After that, the board should start flashing its built in LED. Mission accomplished.
+    </p>
+    
 </div>
 
 </body>
