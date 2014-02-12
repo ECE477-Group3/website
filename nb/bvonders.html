@@ -15,26 +15,74 @@
 
     <h3 id="week01">Week 01</h3>
 
-    <p class="entry"><b>August 20, 2013 (1 hour)</b>:<br>Met as a team after class to discuss preliminary project proposal.</p>
+    <p class="entry"><b>January 14, 2014 (3 hour)</b>:<br>Met as a team after class to discuss preliminary project proposal.
+Played and evaluated previous ScalePad MIDI controller builds.
+Microcontrollers and development platforms were researched. Initial options include Intel Atom motherboard, Beagleboards, SHARC development kit, and the Tiva C launchpad with an ARM Cortex-M4F . </p>
 
-    <p class="entry"><b>August 22, 2013 (2 hours)</b>:<br>Met as a team after class to finish writing preliminary project proposal.</p>
+    <p class="entry"><b>January 15, 2014 (2 hours)</b>:<br>Researched patents and prior art. Selected Patents US 5841053 A, US 8426716 B2, DE 202013104376 U1 on Google Patents to write up on initial project proposal. Image shown illustrates DE 202013104376 U1 implemented in the Ableton Push.<br>
+<img src="bvondersimages/week1image1.png" alt="Patent Diagram"></p>
+
+
+
+<p class="entry"><b>January 16, 2014 (2 hours)</b>:<br>Researched commercial product analysis. Most closely related products include the Ableton Push, Korg Kaoss Pad Quad, and the Misa Kitara. The Ableton Push contains the element of a remappable key grid, the Kaoss Pad Quad includes the element of x-y grid audio effect control, and the Kitara contains some elements of both with a touch screen controlled synthesizer. <br>
+<img src="bvondersimages/week1image2.png" alt="Ableton Push">   <img src="bvondersimages/week1image3.png" alt="Kaoss Pad Quad">   <img src="bvondersimages/week1image4.png" alt="Misa Kitara"></p>
+
+<p class="entry"><b>January 15, 2014 (2 hours)</b>:<br>Patent and commercial product analyses were written in the initial project proposal for submission. </p>
 
     <p class="summary"><b>WEEK 01 SUMMARY</b><br>
-                       <u>Accomplishments</u>: Submitted preliminary project proposal.<br>
-                       <u>Weekly Work Total</u>: 3 hours<br>
-                       <u>Project Work Total</u>: 3 hours</p>
+                       <u>Accomplishments</u>: The preliminary project proposal was completed without issue. Potential platforms were investigated at length, and the initial project goal seems very feasible. <br>
+                       <u>Weekly Work Total</u>: 9 hours<br>
+                       <u>Project Work Total</u>: 9 hours</p>
 
 
     <h3 id="week02">Week 02</h3>
 
-    <p class="entry"><b>August 27, 2013 (2 hours)</b>:<br>Met as a team to formulate PSSC for presentation in class on September 7.</p>
+    <p class="entry"><b>January 20, 2014 (2 hours)</b>:<br>Read through segments of Jonathan W. Valvano’s “Introduction to ARM Cortex-M Microcontrollers.” Topics included ARM assembly language programming techniques and available modules on the microcontroller.<br><img src="bvondersimages/week2image1.png" alt="Valvano's Book"><br>Different modules for touch interaction were researched. The originally desired capacitive multi touch screens and controllers proved difficult to obtain as individual units with adequate documentation. Single point resistive touch screens showed more promise with touch, LCD, and controller units designed for rapid prototyping. 
+</p>
 
-    <p class="entry"><b>August 29, 2013 (3 hours)</b>:<br>Met as a team to finish the final project proposal.</p>
+    <p class="entry"><b>January 23, 2014 (4 hours)</b>:<br>Team meeting collaborated on final project proposal. PSSC’s were discussed at length and individual homework assignments were delegated. 
+The Tiva C launchpad was determined to be our development platform of choice. The MCU is a TM4C123GH6PMI ARM Cortex M4F. Advantages include a floating point unit with a single cycle multiply accumulate and an optimized DSP library. Motherboards were determined to be overkill. <br><img src="bvondersimages/week2image2.png" alt="Tiva C launchpad"></p>
 
     <p class="summary"><b>WEEK 02 SUMMARY</b><br>
                        <u>Accomplishments</u>: PSSC and project proposal finalized.<br>
-                       <u>Weekly Work Total</u>: 5 hours<br>
-                       <u>Project Work Total</u>: 8 hours</p>
+                       <u>Weekly Work Total</u>: 6 hours<br>
+                       <u>Project Work Total</u>: 15 hours</p>
+
+<h3 id="week03">Week 03</h3>
+
+    <p class="entry"><b>January 27, 2014 (2 hours)</b>:<br>Research on alternative input methods sought to enable velocity sensitive input. Potential methods include hall effect sensors, FSR’s, PCB carbon contacts, and large scale ADC with calibration algorithm. Velocity adjustment was also determined to be possible through the touch screen if original plan of tactile switches and PISO registers is used. 
+</p>
+
+    <p class="entry"><b>January 29, 2014 (3 hours)</b>:<br>Completed PCB assignment in Eagle. Built library parts for the team per tutorial and located footprints for standard parts in the built in library. Schematic build and layout went without issue.</p>
+
+    <p class="summary"><b>WEEK 03 SUMMARY</b><br>
+                       <u>Accomplishments</u>: PCB excercise completed.<br>
+                       <u>Weekly Work Total</u>: 5hours<br>
+                       <u>Project Work Total</u>: 20 hours</p>
+
+<h3 id="week04">Week 04</h3>
+
+    <p class="entry"><b>February 4, 2014 (2 hours)</b>:<br>Met with the team in the lab after class period to go over design constraint analysis. DAC samples from Cirrus Logic arrived, recovered leftover parts from previous MIDI controller builds.</p> 
+
+    <p class="entry"><b>February 5, 2014 (8 hours)</b>:<br>Met with the team in the lab with the team to agree upon specifics of the design constraint analysis. Found that the Cirrus Logic DAC samples will not interface with the selected Tiva C MPU due to a lack of I2S unit (usually limited to DSP chips). 
+Received the Tiva C launchpad to evaluate.
+<br>Ordered an assortment of different tactile switches for evaluation. Also ordered MIDI connectors and ¼ inch audio connectors for development.
+<br>Samples of key components were ordered from TI including:
+<br>TSC2046- 4-Wire Touch Screen Controller with low voltage digital I/O
+<br>DRV135- Audio Balanced Line Drivers
+<br>TM4C123GH6PM- Tiva C Series Microcontroller
+<br>TM4C1230H6PM- Tiva C Series Microcontroller
+</p>
+
+<p class="entry"><b>February 4, 2014 (2 hours)</b>:<br>Team meeting finalized components of design constraint analysis, primarily the bill of materials. The team took an opportunity to test out a previous build of the Scale Pad MIDI controller and spent time discussing potential changes to the PSSCs.
+<br><img src="bvondersimages/scalepad2.jpg" alt="Previous Scale Pad build" width="326" height="117"></p> 
+
+
+
+    <p class="summary"><b>WEEK 04 SUMMARY</b><br>
+                       <u>Accomplishments</u>: <br>
+                       <u>Weekly Work Total</u>: 12 hours<br>
+                       <u>Project Work Total</u>: 32 hours</p>
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
